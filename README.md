@@ -4,6 +4,33 @@
 
 这是一个 **Codex 技能（skill）**：把本目录放进 `$CODEX_HOME/skills/`（默认 `~/.codex/skills/`）后，你在 Codex 里说“把这张手绘图转成 CAD”，它就会被自动调用；同时它也是一个独立的命令行工具，可以直接跑 `scripts/sketch2cad.py`。
 
+## English
+
+**sketch-to-cad** turns a photo or scan of a hand-drawn sketch into clean, editable **DXF line work** that any CAD can open (AutoCAD, ZWCAD, BricsCAD, LibreCAD, ...), and can scale the result to real-world size from a single known reference dimension.
+
+It is packaged as a **Codex skill**, and also works as a plain command-line tool.
+
+- Requirements: Python 3.9+, `numpy`, `opencv-python`, `scikit-image`
+- Install as a Codex skill:
+
+  ```bash
+  git clone https://github.com/wgycyst/sketch-to-cad.git ~/.codex/skills/sketch-to-cad
+  ```
+
+- Quick start:
+
+  ```bash
+  pip install -r requirements.txt
+  python scripts/check_env.py
+  python scripts/sketch2cad.py sketch.jpg --auto-crop --grid
+  python scripts/sketch2cad.py sketch.jpg --auto-crop --ref 120,112,1010,96 --ref-mm 4800 -o out.dxf
+  python scripts/dxf_check.py out.dxf check.png
+  ```
+
+- Output: DXF (R12 / AC1009, `$INSUNITS = 4`, millimetres), a preview PNG, and a rebuild image for verification.
+- Boundaries: this vectorises strokes. It does not OCR handwritten dimensions, and curves become dense polylines. For drawings that must be square, dimensioned and to scale, rebuild the geometry parametrically instead of tracing.
+- License: MIT.
+
 ## 特性
 
 - 手机斜拍也能用：自动识别纸张四角做透视校正（`--auto-crop`），也可手给四角（`--corners`）
@@ -41,7 +68,7 @@ python scripts/dxf_check.py out.dxf check.png
 ## 安装为 Codex 技能
 
 ```bash
-git clone <本仓库地址> ~/.codex/skills/sketch-to-cad
+git clone https://github.com/wgycyst/sketch-to-cad.git ~/.codex/skills/sketch-to-cad
 ```
 
 或者直接把 `sketch-to-cad` 文件夹复制到 `~/.codex/skills/` 下即可（Windows 为 `%USERPROFILE%\.codex\skills\`）。
