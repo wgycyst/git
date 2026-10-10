@@ -1,0 +1,7 @@
+interface:
+  display_name: "手绘图转 CAD"
+  short_description: "把手绘草图照片转成 CAD 可编辑的 DXF 线稿"
+  default_prompt: "用 $sketch-to-cad 把这张手绘草图照片转成 CAD 线稿（DXF）"
+
+policy:
+  allow_implicit_invocation: true

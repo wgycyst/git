@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+# 转换产物（不提交）
+待转换/
+已转换/
+预览/
+*.png.tmp
